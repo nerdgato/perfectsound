@@ -1,0 +1,28 @@
+<!-- ferremas/templates/ferremas/home.html -->
+{% extends 'ferremas/base.html' %}
+
+{% load static %}
+
+{% block content %}
+<div class="flex flex-col md:flex-row">
+    <!-- Columna izquierda -->
+    <div class="w-full md:w-1/2 p-4">
+        <img src="{% static 'img/logo.png' %}" alt="Imagen grande" class="w-4/6 h-auto object-contain mx-auto">
+    </div>
+    <!-- Columna derecha -->
+    <div class="w-full md:w-1/2 p-4">
+        <h1 class="text-2xl font-bold mb-4">BIENVENIDOS</h1>
+        <p class="text-lg font-bold">Sobre nosotros</p>
+        <p>Más que una simple tienda de instrumentos musicales, somos una institución profundamente arraigada en la historia musical de Chile. Con más de un siglo de servicio desde 1920, nuestra trayectoria legendaria abarca cuatro generaciones, durante las cuales hemos sido testigos y partícipes del crecimiento y desarrollo de la cultura musical en el país. Hemos sido un pilar fundamental en el fomento de la educación musical, apoyando tanto a estudiantes como a maestros.</p>
+        <p class="text-lg font-bold">Misión y Visión</p>
+        <p>Nuestra misión es ofrecer instrumentos musicales de la más alta calidad junto con un servicio excepcional a músicos de todas las edades y niveles de experiencia. Aspiramos a ser un apoyo confiable y certero, nutriendo con conocimiento y pasión musical a las generaciones presentes y futuras en todo Chile.</p>
+        <br><br>
+        <div class="w-full md:w-1/2 p-4">
+            <img src="{% static 'img/sponsor.png' %}" alt="Imagen grande" class="w-6/6 h-auto object-contain mx-auto">
+        </div>
+    </div>
+    </div>
+
+    </div>
+</div>
+{% endblock %}

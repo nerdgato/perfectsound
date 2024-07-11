@@ -1,0 +1,83 @@
+<!-- ferremas/templates/ferremas/base.html -->
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link rel="icon" href="{% static 'img/favicon.ico' %}">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <script src="https://sdk.mercadopago.com/js/v2"></script>
+
+    <header>
+        <!-- Aquí va tu menú de navegación -->
+        <div class="contacto">
+            <div>
+                <a href="#">Contacto</a>
+            </div>
+            <div>
+                <a href="#">Seguimiento</a>
+            </div>
+            <div>
+                <a href="#">Tiendas</a>
+            </div>
+        </div>
+        <nav class="flex justify-between items-center w-full px-4 menu">
+            <a href="{% url 'home' %}" class="flex-1 text-center">
+                <img src="{% static 'img/logo_banner.png' %}" alt="Logo" class="h-20 mx-auto object-contain">
+            </a>
+            <a href="{% url 'productos' %}" class="flex-1 text-lg text-center">Productos</a>
+            <div class="auth flex-1 flex items-center justify-center text-lg">
+                <i class="fas fa-solid fa-user"></i>
+                <a href="{% url 'login' %}" class="mx-2">Inicia sesión</a>
+                <p> o </p>
+                <a href="{% url 'register' %}" class="mx-2">Regístrate</a>
+            </div>
+            <a href="{% url 'carrito' %}" id="cart-link" class="flex-1 text-lg text-center"><i class="fas fa-shopping-cart"></i></a>
+        </nav>
+    </header>
+
+    {% block content %}
+    <!-- El contenido específico de la página irá aquí -->
+    {% endblock %}
+
+    <footer>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium, adipisci fuga iusto maxime molestias possimus quod voluptas. A ducimus, ipsa laudantium odio omnis repudiandae tempora voluptates? Ab blanditiis fugiat quia.</p>
+        <hr>
+        <div class="footer-content">
+            <p>Todos los derechos reservados © 2024</p>
+        </div>
+    </footer>
+    <script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+    const authDiv = document.querySelector('.auth');
+    const navDiv = document.querySelector('.menu');
+    if (sessionStorage.getItem('loggedIn') === 'true') {
+        authDiv.innerHTML = `
+            <i class="fas fa-solid fa-user"></i>
+            <a href="#" id="logout">Cerrar sesión</a>
+        `;
+        document.getElementById('logout').addEventListener('click', function() {
+            sessionStorage.setItem('loggedIn', 'false');
+            sessionStorage.setItem('staff', 'false');
+            location.reload();
+        });
+
+        if (sessionStorage.getItem('staff') === 'true') {
+            const crudLink = document.createElement('div');
+            crudLink.innerHTML = `<a href="{% url 'crud' %}">Crud</a>`;
+            navDiv.appendChild(crudLink);
+            }
+        }
+    });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+    <script src="{% static 'js/base.js' %}"></script>
+</body>
+</html>
