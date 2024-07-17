@@ -9,6 +9,8 @@ from .serializers import ProductoSerializer, UsuarioSerializer
 from django.core.exceptions import ObjectDoesNotExist
 from django.conf import settings
 import mercadopago
+from django.shortcuts import redirect
+
 
 
 
@@ -52,19 +54,13 @@ def confirmar_pago_mercado_pago(request):
     if request.method == 'POST':
         payment_id = request.POST.get('payment_id')
         status = request.POST.get('status')
-
-        if status == 'approved':
-            return render(request, 'pago_exitoso.html', {'payment_id': payment_id})
-        else:
-            return render(request, 'pago_fallido.html', {'payment_id': payment_id})
-
-
-
-
-
-
-
-
+        # Your existing logic for handling POST requests
+        return redirect('home')
+    else:
+        # Optionally, you can return a 405 Method Not Allowed response
+        # return HttpResponseNotAllowed(['POST'])
+        # Or redirect the user to the home page for any non-POST requests
+        return redirect('home')
 
 
 @csrf_exempt
